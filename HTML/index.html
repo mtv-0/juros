@@ -148,6 +148,7 @@
             document.getElementById("resultado1").textContent = ``;
 
             descontoBox.style.display = "block";
+            valorComDesconto.style.display = "none";
             document
               .getElementById("resultado")
               .scrollIntoView({ behavior: "smooth" });
@@ -181,24 +182,22 @@
 
         descontoBox.addEventListener("submit", function (event) {
           event.preventDefault();
+
           const valor = parseFloat(document.getElementById("valor").value);
           const resultado = parseFloat(
-            document
-              .getElementById("resultado")
-              .textContent.split(" ")[2]
-              .replace(",", "")
+            document.getElementById("resultado").textContent.split("R$ ")[1]
           );
           const taxaDesconto = parseFloat(
             document.getElementById("valorDesconto").value
           );
 
-          const valorDesconto =
-            ((valor - resultado) * (100 - taxaDesconto)) / 100;
+          const valorDesconto = resultado * (taxaDesconto / 100);
           const valorFinalComDesconto = resultado - valorDesconto;
 
           valorComDesconto.textContent = `Valor com desconto: R$ ${valorFinalComDesconto.toFixed(
             2
           )}`;
+          valorComDesconto.style.display = "block";
           valorComDesconto.scrollIntoView({ behavior: "smooth" });
         });
       });
