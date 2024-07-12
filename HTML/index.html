@@ -191,8 +191,13 @@
             document.getElementById("valorDesconto").value
           );
 
-          const valorDesconto = resultado * (taxaDesconto / 100);
-          const valorFinalComDesconto = resultado - valorDesconto;
+          //const valorDesconto = resultado * (taxaDesconto / 100);
+          //const valorFinalComDesconto = resultado - valorDesconto;
+
+          let val_temp = valor - resultado;
+          val_temp *= (100 - taxaDesconto) / 100;
+
+          const valorFinalComDesconto = resultado + val_temp;
 
           valorComDesconto.textContent = `Valor com desconto: R$ ${valorFinalComDesconto.toFixed(
             2
