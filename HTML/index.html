@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora VF e VP</title>
+  </head>
+  <body>
+    <h1>Calculadora VF e VP</h1>
+    <form id="calculator-form">
+      <label for="valor">Valor:</label>
+      <input type="number" id="valor" name="valor" required />
+      <br />
+      <label for="taxa">Taxa (%):</label>
+      <input type="number" id="taxa" name="taxa" required />
+      <br />
+      <label for="meses">Meses:</label>
+      <input type="number" id="meses" name="meses" required />
+      <br />
+      <input type="radio" id="vf" name="opcao" value="vf" checked />
+      <label for="vf">Calcular Valor Futuro (VF)</label>
+      <br />
+      <input type="radio" id="vp" name="opcao" value="vp" />
+      <label for="vp">Calcular Valor Presente (VP)</label>
+      <br />
+      <input type="submit" value="Calcular" />
+    </form>
+    <div id="resultado"></div>
+    <!-- Área de saída para exibir o resultado -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("calculator-form");
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const valor = parseFloat(document.getElementById("valor").value);
+          const taxa = parseFloat(document.getElementById("taxa").value);
+          const meses = parseInt(document.getElementById("meses").value);
+          const opcao = document.querySelector(
+            'input[name="opcao"]:checked'
+          ).value;
+
+          let resultado;
+
+          if (opcao === "vf") {
+            resultado = calcularVF(valor, taxa, meses);
+          } else {
+            resultado = calcularVP(valor, taxa, meses);
+          }
+
+          document.getElementById(
+            "resultado"
+          ).textContent = `Resultado: R$ ${resultado.toFixed(2)}`;
+        });
+
+        function calcularVF(valor, taxa, meses) {
+          const val_mes = valor / meses;
+          let val_fim = 0;
+
+          for (let i = 0; i < meses; i++) {
+            let val_temp = 1;
+            for (let j = 1; j <= meses - i; j++) {
+              val_temp *= 1 + taxa / 100;
+            }
+            val_fim += val_mes * val_temp;
+          }
+
+          return val_fim;
+        }
+
+        function calcularVP(valor, taxa, meses) {
+          let val_temp = 1;
+          for (let j = 1; j <= meses; j++) {
+            val_temp *= 1 + taxa / 100;
+          }
+          const val_fim = valor / val_temp;
+
+          return val_fim;
+        }
+      });
+    </script>
+  </body>
+</html>
