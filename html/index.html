@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora VF e VP</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Calculadora VF e VP</h1>
+    <form id="calculator-form">
+      <label for="valor">Valor:</label>
+      <input type="number" id="valor" name="valor" required />
+      <br />
+      <label for="taxa">Taxa (%):</label>
+      <input type="number" id="taxa" name="taxa" required />
+      <br />
+      <label for="meses">Meses:</label>
+      <input type="number" id="meses" name="meses" required />
+      <br />
+      <input
+        type="radio"
+        id="vf"
+        name="opcao"
+        value="vf"
+        style="display: inline-block"
+      />
+      <label for="vp" style="display: inline-block"
+        >Calcular Valor Futuro (VF)</label
+      >
+      <br />
+      <input
+        type="radio"
+        id="vp"
+        name="opcao"
+        value="vp"
+        style="display: inline-block"
+      />
+      <label for="vp" style="display: inline-block"
+        >Calcular Valor Presente (VP)</label
+      >
+      <br />
+      <input type="submit" value="Calcular" />
+    </form>
+    <div id="resultado"></div>
+    <div id="resultado1"></div>
+
+    <form id="desconto-box" style="display: none">
+      <label for="valor">Desconto (%):</label>
+      <input type="number" id="valorDesconto" name="valor" required />
+      <input type="submit" value="Calcular Desconto" />
+    </form>
+    <div id="valorComDesconto"></div>
+    <script src="js/script.js"></script>
+  </body>
+</html>
