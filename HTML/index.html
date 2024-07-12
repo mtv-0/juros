@@ -4,6 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora VF e VP</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        box-sizing: border-box; /* Adicionado para corrigir o espaçamento */
+      }
+      input[type="radio"] {
+        margin-right: 5px;
+      }
+      input[type="submit"] {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      #resultado {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <h1>Calculadora VF e VP</h1>
@@ -26,7 +77,6 @@
       <input type="submit" value="Calcular" />
     </form>
     <div id="resultado"></div>
-    <!-- Área de saída para exibir o resultado -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("calculator-form");
@@ -58,11 +108,7 @@
           let val_fim = 0;
 
           for (let i = 0; i < meses; i++) {
-            let val_temp = 1;
-            for (let j = 1; j <= meses - i; j++) {
-              val_temp *= 1 + taxa / 100;
-            }
-            val_fim += val_mes * val_temp;
+            val_fim += val_mes / Math.pow(1 + taxa / 100, i);
           }
 
           return val_fim;
